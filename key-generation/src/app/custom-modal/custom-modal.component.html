@@ -1,0 +1,25 @@
+<div class="modal-header">
+    <h4 class="modal-title">Generated Key for {{formData.appName}}</h4>
+    <button type="button" class="close" data-dismiss="modal" (click)="activeModal.close('dismiss')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <p>App Name is {{formData.appName}}</p>
+    <mat-divider fxFlex="1 0"></mat-divider>
+    <p>App Key is {{formData.key}}</p>
+    <mat-divider fxFlex="1 0"></mat-divider>
+    <p>App Id is {{formData.appId}}</p>
+    <mat-divider fxFlex="1 0"></mat-divider>
+    <p>App Valid Till {{formData.validTill}}</p>
+    <mat-divider fxFlex="1 0"></mat-divider>
+    <p>App Owner is {{formData.ownerName}}</p>
+    <mat-divider fxFlex="1 0"></mat-divider>
+    <p>App Owner Email is {{formData.ownerEmails}}</p>
+
+
+</div>
+<!-- <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+        (click)="activeModal.close('close')">Close</button>
+</div> -->

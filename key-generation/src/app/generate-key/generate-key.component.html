@@ -1,0 +1,42 @@
+<mat-toolbar color="primary">
+    <span class="fill-remaining-space">Generate key for application</span>
+  </mat-toolbar>
+  
+  <div class="parent">
+    <form class="form" [formGroup]="generateKeyForm" (ngSubmit)="generateKey()">
+      <mat-form-field appearance="outline">
+        <mat-label>Application Name</mat-label>
+        <input matInput formControlName="appName">
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline">
+        <mat-label>App Id</mat-label>
+        <input matInput formControlName="appId">
+      </mat-form-field>
+  
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Valid Till</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="validTill">
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline">
+          <mat-label>Owner Name</mat-label>
+          <input matInput formControlName="ownerName">
+        </mat-form-field>
+      </p>
+      <mat-form-field appearance="outline">
+        <mat-label>Owner Email</mat-label>
+        <input matInput formControlName="ownerEmails">
+      </mat-form-field>
+  
+      <p class="generateButton">
+        <button mat-raised-button color="primary">Generate</button>
+      </p>
+    </form>
+  </div>
+  
+  <router-outlet></router-outlet>

@@ -1,0 +1,27 @@
+<mat-toolbar color="primary">
+    <span class="fill-remaining-space">Generate key for application</span>
+</mat-toolbar>
+
+<div class="login">
+    <form class="form" #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+        <mat-toolbar color="primary" class="test">
+            <span>Login Form</span>
+          </mat-toolbar>
+        <mat-form-field appearance="outline">
+            <mat-label>Email Address</mat-label>
+            <input matInput name="email" ngModel>
+        </mat-form-field>
+        <p>
+            <mat-form-field appearance="outline">
+                <mat-label>Password</mat-label>
+                <input matInput type="password" name="password" ngModel>
+            </mat-form-field>
+        </p>
+       
+
+        <p class="loginButton">
+            <button mat-raised-button color="primary">Login</button>
+        </p>
+        <a routerLink="/register">New User ? click to register</a>
+    </form>
+</div>

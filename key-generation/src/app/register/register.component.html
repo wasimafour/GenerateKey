@@ -1,0 +1,31 @@
+<mat-toolbar color="primary">
+    <span class="fill-remaining-space">Generate key for application</span>
+</mat-toolbar>
+
+<div class="alert alert-success" *ngIf="isSuccessful">
+    Your registration is successful!
+  </div>
+  
+<div class="register">
+    <form class="registerForm" #registerForm="ngForm" (ngSubmit)="registerButton(registerForm)">
+        <mat-toolbar color="primary" class="test">
+            <span>Registration Form</span>
+          </mat-toolbar>
+        <mat-form-field appearance="outline">
+            <mat-label>Email Address</mat-label>
+            <input ngModel name="email" matInput>
+        </mat-form-field>
+        <p>
+            <mat-form-field appearance="outline">
+                <mat-label>Password</mat-label>
+                <input ngModel name="password" matInput type="password">
+            </mat-form-field>
+        </p>
+       
+
+        <p class="registerButton">
+            <button mat-raised-button color="primary">Register</button>
+        </p>
+        
+    </form>
+</div>

@@ -1,0 +1,50 @@
+.fill-remaining-space {
+   
+    flex: 1 1 auto;
+    text-align: center;
+  }
+.parent {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+   margin-top: 5%;
+ }
+
+ mat-form-field {
+   width: 50%; 
+   padding: 10px;
+  }
+
+ 
+
+.form {
+   border: solid 1px black;
+}
+ .generateButton {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+ } 
+ /* .fill-remaining-space {
+   
+    flex: 1 1 auto;
+    text-align: center;
+  }
+
+.root {
+   margin-left: 350px; 
+   margin-top: 50px;   
+} 
+
+mat-form-field {
+   width: 30%; 
+   padding: 10px;
+  }
+
+.test {
+   margin-left: 250px;
+}
+
+  */

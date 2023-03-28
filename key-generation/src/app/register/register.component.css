@@ -1,0 +1,38 @@
+.fill-remaining-space {   
+    flex: 1 1 auto;
+    text-align: center;
+}
+
+.fill-remaining-login {   
+  flex: 1 1 auto;
+  text-align: center;
+  width: 250px;
+}
+.test {
+  height: 50px;
+}
+
+.register {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 8%;
+}
+
+.registerButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+} 
+
+.registerForm {
+  border: solid 1px black;
+}
+
+mat-form-field {
+  padding:10px;
+  width: 300px;
+ }
+
