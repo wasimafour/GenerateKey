@@ -4,6 +4,7 @@ import {LoginComponent} from './login/login.component';
 import {GenerateKeyComponent} from './generate-key/generate-key.component';
 import {RegisterComponent} from './register/register.component';
 import {NotAuthorizedComponent} from './not-authorized/not-authorized.component';
+import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
   {
@@ -11,17 +12,16 @@ const routes: Routes = [
     path: ""
   },
   {
-    component: GenerateKeyComponent,
+    component: GenerateKeyComponent, canActivate:[AuthGuard],
     path: "generate"
-   
   },
-  {
+   {
     component: RegisterComponent,
     path: "register"
   },
   {
     component: NotAuthorizedComponent,
-    path: "not-authorized"
+    path: "***"
   },
 ];
 

@@ -12,7 +12,7 @@ import {MatNativeDateModule} from '@angular/material/core';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
-import { HttpClientModule} from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CustomModalComponent } from './custom-modal/custom-modal.component';
 import {MatDividerModule} from '@angular/material/divider';
@@ -20,6 +20,10 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import {FormsModule} from '@angular/forms';
 import { NotAuthorizedComponent } from './not-authorized/not-authorized.component'
+import { AuthGuard } from './auth/auth.guard';
+
+import { LoginService } from './service/login/login.service';
+import { Injectable } from '@angular/core';
 
 
 @NgModule({
@@ -47,7 +51,9 @@ import { NotAuthorizedComponent } from './not-authorized/not-authorized.componen
     MatDividerModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    AuthGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

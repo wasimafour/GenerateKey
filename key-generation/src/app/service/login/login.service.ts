@@ -19,4 +19,8 @@ export class LoginService {
   login(loginData:any) {
      return this.http.post(this.url,loginData,{headers:this.requestHeader});
   }
+
+  getToken() {
+    return localStorage.getItem("token");
+  }
 }

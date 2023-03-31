@@ -34,7 +34,13 @@ export class GenerateKeyComponent {
 
   }
 
-  async generateKey() {
+   generateKey() {
+    this.generateKeyForm.controls.validTill = this.generateKeyForm.controls.validTill.value.toISOString()
+    this.generate.generateKey(this.generateKeyForm.value).subscribe(
+      (respone:any) => {
+        console.info(respone);
+      }
+    )
     //var response:any = await this.generate.generateKey(this.generateKeyForm.value).toPromise()
 
     // this.generatedKey = {
@@ -47,27 +53,27 @@ export class GenerateKeyComponent {
     //     }
     // .subscribe((response:any) => {
     //   console.info(response.data.generatedKey);
-      this.generatedKey = {
-        "key": "key",
-        "appName": this.generateKeyForm.controls.appName.value,
-        "appId": this.generateKeyForm.controls.appId.value,
-        "validTill": this.generateKeyForm.controls.validTill.value.toISOString(),
-        "ownerName": this.generateKeyForm.controls.ownerName.value,
-        "ownerEmails": this.generateKeyForm.controls.ownerEmails.value,
-      }
+      // this.generatedKey = {
+      //   "key": "key",
+      //   "appName": this.generateKeyForm.controls.appName.value,
+      //   "appId": this.generateKeyForm.controls.appId.value,
+      //   "validTill": this.generateKeyForm.controls.validTill.value.toISOString(),
+      //   "ownerName": this.generateKeyForm.controls.ownerName.value,
+      //   "ownerEmails": this.generateKeyForm.controls.ownerEmails.value,
+      // }
     // })
 
-    const modalRef = this.modalService.open(CustomModalComponent,
-      {
-        scrollable: true,
-        windowClass: 'myCustomModalClass',
+    // const modalRef = this.modalService.open(CustomModalComponent,
+    //   {
+    //     scrollable: true,
+    //     windowClass: 'myCustomModalClass',
 
-      });
-      modalRef.componentInstance.formData = this.generatedKey
-    modalRef.result.then((result:any) => {
-      console.log(result);
-    }, (reason:any) => {
-    });
+    //   });
+    //   modalRef.componentInstance.formData = this.generatedKey
+    // modalRef.result.then((result:any) => {
+    //   console.log(result);
+    // }, (reason:any) => {
+    // });
 
   }
 }

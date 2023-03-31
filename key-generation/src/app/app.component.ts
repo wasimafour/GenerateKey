@@ -13,6 +13,9 @@ import { CustomModalComponent } from './custom-modal/custom-modal.component';
 })
 export class AppComponent {
 
+  doSomething(isLoggedIn:boolean){
+    console.info(isLoggedIn);
+  }
   
 }
 

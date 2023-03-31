@@ -25,7 +25,7 @@ export class RegisterComponent implements OnInit {
           this.isSuccessful = true;
           setTimeout(() => {
             this.router.navigate([''])
-          },1000)
+          },500)
       },
       (error) => {
         console.log(error);

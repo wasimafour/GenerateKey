@@ -4,28 +4,37 @@
 
 <div class="alert alert-success" *ngIf="isSuccessful">
     Your registration is successful!
-  </div>
-  
+</div>
+
 <div class="register">
     <form class="registerForm" #registerForm="ngForm" (ngSubmit)="registerButton(registerForm)">
         <mat-toolbar color="primary" class="test">
             <span>Registration Form</span>
-          </mat-toolbar>
+        </mat-toolbar>
         <mat-form-field appearance="outline">
             <mat-label>Email Address</mat-label>
-            <input ngModel name="email" matInput>
+            <input matInput required #email="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" name="email"
+                ngModel>
+            <mat-error *ngIf="email.errors?.required && email.touched" style="color: red;">email address cannot be
+                blank</mat-error>
+            <mat-error *ngIf="email.errors?.pattern && email.touched" style="color: red;">please enter valid email
+                address</mat-error>
         </mat-form-field>
         <p>
             <mat-form-field appearance="outline">
                 <mat-label>Password</mat-label>
-                <input ngModel name="password" matInput type="password">
+                <input matInput required #password="ngModel" minlength="4" type="password" name="password" ngModel>
+                <mat-error *ngIf="password.errors?.required && password.touched" style="color: red;">password cannot be
+                    blank</mat-error>
+                <mat-error *ngIf="password.errors?.minlength && password.touched" style="color: red;">password cannot be
+                    > 4 chars</mat-error>
+
             </mat-form-field>
         </p>
-       
 
         <p class="registerButton">
-            <button mat-raised-button color="primary">Register</button>
+            <button [disabled]="registerForm.invalid" mat-raised-button color="primary">Register</button>
         </p>
-        
+
     </form>
 </div>

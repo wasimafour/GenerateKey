@@ -2,25 +2,41 @@
     <span class="fill-remaining-space">Generate key for application</span>
 </mat-toolbar>
 
+<div class="alert alert-success" *ngIf="isSuccessful">
+    Your registration is successful!
+</div>
+
 <div class="login">
     <form class="form" #loginForm="ngForm" (ngSubmit)="login(loginForm)">
         <mat-toolbar color="primary" class="test">
             <span>Login Form</span>
-          </mat-toolbar>
+        </mat-toolbar>
+
         <mat-form-field appearance="outline">
             <mat-label>Email Address</mat-label>
-            <input matInput name="email" ngModel>
+            <input matInput required #email="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" name="email"
+                ngModel>
+            <mat-error *ngIf="email.errors?.required && email.touched" style="color: red;">email address cannot be
+                blank</mat-error>
+            <mat-error *ngIf="email.errors?.pattern && email.touched" style="color: red;">Please enter valid email
+                address</mat-error>
         </mat-form-field>
+
+
         <p>
             <mat-form-field appearance="outline">
                 <mat-label>Password</mat-label>
-                <input matInput type="password" name="password" ngModel>
+                <input matInput required #password="ngModel" minlength="4" type="password" name="password" ngModel>
+                <mat-error *ngIf="password.errors?.required && password.touched" style="color: red;">password cannot be
+                    blank</mat-error>
+                <mat-error *ngIf="password.errors?.minlength && password.touched" style="color: red;">password cannot be
+                    > 4 chars</mat-error>
             </mat-form-field>
         </p>
-       
+
 
         <p class="loginButton">
-            <button mat-raised-button color="primary">Login</button>
+            <button [disabled]="loginForm.invalid" mat-raised-button color="primary">Login</button>
         </p>
         <a routerLink="/register">New User ? click to register</a>
     </form>
