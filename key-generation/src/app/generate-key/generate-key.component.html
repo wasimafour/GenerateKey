@@ -1,42 +1,72 @@
 <mat-toolbar color="primary">
-    <span class="fill-remaining-space">Generate key for application</span>
-  </mat-toolbar>
-  
-  <div class="parent">
-    <form class="form" [formGroup]="generateKeyForm" (ngSubmit)="generateKey()">
+  <span class="fill-remaining-space">Generate key for application</span>
+</mat-toolbar>
+
+<div class="parent">
+  <form class="form" [formGroup]="generateKeyForm" (ngSubmit)="generateKey()">
+    <mat-form-field appearance="outline">
+      <mat-label>Application Name</mat-label>
+      <input matInput formControlName="appName">
+      <mat-error *ngIf="appName && appName.invalid && appName.touched" style="color: red;">Application name cannot be
+        blank</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>App Id</mat-label>
+      <input matInput formControlName="appId">
+      <mat-error *ngIf="appId && appId.invalid && appId.touched" style="color: red;">Application Id cannot be
+        blank</mat-error>
+    </mat-form-field>
+
+    <p>
       <mat-form-field appearance="outline">
-        <mat-label>Application Name</mat-label>
-        <input matInput formControlName="appName">
+        <mat-label>Valid Till</mat-label>
+        <input matInput [matDatepicker]="picker" [min]="todayDate" formControlName="validTill">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="validTill && validTill.invalid && validTill.touched" style="color: red;">Valid date cannot be
+          blank</mat-error>
       </mat-form-field>
-  
+
       <mat-form-field appearance="outline">
-        <mat-label>App Id</mat-label>
-        <input matInput formControlName="appId">
+        <mat-label>Owner Name</mat-label>
+        <input matInput formControlName="ownerName">
+        <mat-error *ngIf="ownerName && ownerName.invalid && ownerName.touched" style="color: red;">Owner name cannot be
+          blank</mat-error>
       </mat-form-field>
+    </p>
+    <mat-form-field appearance="outline">
+      <mat-label>Owner Email</mat-label>
+      <input matInput formControlName="ownerEmails">
+      <mat-error *ngIf="ownerEmails.errors?.required && ownerEmails.touched" style="color: red;">email address cannot be
+        blank</mat-error>
+      <mat-error *ngIf="ownerEmails.errors?.pattern && ownerEmails.touched" style="color: red;">Please enter valid email
+        address</mat-error>
+    </mat-form-field>
+
+
+    <ng-select [items]="categories" bindLabel="name" placeholder="Select Category" appendTo="body" [multiple]="true"
+        [(ngModel)]="selected" [ngModelOptions]="{standalone: true}" [hideSelected]="true">
+        
+      </ng-select>
+
+      
+    <!-- <p class="generateButton">
+      <button [disabled]="generateKeyForm.invalid" mat-raised-button color="primary">Generate</button>
+    </p>   -->
+
+    <p class="generateButton">
+      <button mat-raised-button color="primary">Generate</button>
+    </p>  
+    
+  </form>
   
-      <p>
-        <mat-form-field appearance="outline">
-          <mat-label>Valid Till</mat-label>
-          <input matInput [matDatepicker]="picker" formControlName="validTill">
-          <mat-hint>MM/DD/YYYY</mat-hint>
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-  
-        <mat-form-field appearance="outline">
-          <mat-label>Owner Name</mat-label>
-          <input matInput formControlName="ownerName">
-        </mat-form-field>
-      </p>
-      <mat-form-field appearance="outline">
-        <mat-label>Owner Email</mat-label>
-        <input matInput formControlName="ownerEmails">
-      </mat-form-field>
-  
-      <p class="generateButton">
-        <button mat-raised-button color="primary">Generate</button>
-      </p>
-    </form>
-  </div>
-  
-  <router-outlet></router-outlet>
+        
+</div>
+
+
+
+
+
+<router-outlet></router-outlet>

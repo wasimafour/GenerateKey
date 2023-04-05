@@ -21,7 +21,7 @@ const routes: Routes = [
   },
   {
     component: NotAuthorizedComponent,
-    path: "***"
+    path: "not-authorized"
   },
 ];
 

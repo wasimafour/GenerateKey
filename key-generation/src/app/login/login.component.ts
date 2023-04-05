@@ -3,11 +3,15 @@ import { Router } from '@angular/router';
 import {LoginService} from '../service/login/login.service';
 import { RegisterService } from '../service/register/register.service';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
+
+
 export class LoginComponent implements OnInit {
 
   constructor(private loginService: LoginService,private router:Router,private registerService:RegisterService) { }
@@ -35,7 +39,7 @@ export class LoginComponent implements OnInit {
   // }
 
   login(loginData:any) {
-    
+
       console.info("In login form");
       this.loginService.login(loginData.value).subscribe(
         (response:any) => {
@@ -52,8 +56,7 @@ export class LoginComponent implements OnInit {
         }
       )
     
-   
-    
+      
   }
 
 }

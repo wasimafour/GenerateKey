@@ -21,9 +21,12 @@ import { RegisterComponent } from './register/register.component';
 import {FormsModule} from '@angular/forms';
 import { NotAuthorizedComponent } from './not-authorized/not-authorized.component'
 import { AuthGuard } from './auth/auth.guard';
-
+import {MatChipsModule} from '@angular/material/chips';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { LoginService } from './service/login/login.service';
 import { Injectable } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 
 @NgModule({
@@ -49,7 +52,11 @@ import { Injectable } from '@angular/core';
     HttpClientModule,
     NgbModule,
     MatDividerModule,
-    FormsModule
+    FormsModule,
+    MatChipsModule,
+    MatAutocompleteModule,
+    MatIconModule,
+    NgSelectModule
   ],
   providers: [
     AuthGuard

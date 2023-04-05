@@ -16,7 +16,22 @@
     <p>App Owner is {{formData.ownerName}}</p>
     <mat-divider fxFlex="1 0"></mat-divider>
     <p>App Owner Email is {{formData.ownerEmails}}</p>
-
+    
+        <h3>Selected Servies are</h3>
+        <p>
+            <span *ngFor="let item of formData.selectedServices">
+                {{item.name}}
+            </span>
+        </p>
+        
+        <p>
+            <span>API Key: </span>
+        </p>
+        <p>
+            <span>API Id: </span>
+        </p>
+        
+     
 
 </div>
 <!-- <div class="modal-footer">

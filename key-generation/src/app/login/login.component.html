@@ -2,14 +2,10 @@
     <span class="fill-remaining-space">Generate key for application</span>
 </mat-toolbar>
 
-<div class="alert alert-success" *ngIf="isSuccessful">
-    Your registration is successful!
-</div>
-
 <div class="login">
     <form class="form" #loginForm="ngForm" (ngSubmit)="login(loginForm)">
         <mat-toolbar color="primary" class="test">
-            <span>Login Form</span>
+            <span>{{formName}}</span>
         </mat-toolbar>
 
         <mat-form-field appearance="outline">
