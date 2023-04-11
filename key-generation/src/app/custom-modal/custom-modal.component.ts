@@ -10,10 +10,15 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class CustomModalComponent implements OnInit {
   @Input() public formData:any;
-  constructor(
-    public activeModal: NgbActiveModal
-  ) { }
+  constructor(public activeModal: NgbActiveModal) {
+
+   }
+   isServiceSelected:boolean=false;
       ngOnInit(): void {
+        if(this.formData.selectedServices.length > 0) {
+          this.isServiceSelected = true
+        }
+
       }
      
       closeModal(message: string) {
