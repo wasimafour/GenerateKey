@@ -44,14 +44,19 @@ export class GeneratekeyService {
     return this.http.post(this.url, this.formData, this.options);
   }
 
-  getEmails(groupKey: string) {
-    const optionsEmail = {
-      params: new HttpParams().set('groupKey', groupKey)
-    };
+  headers1 = new HttpHeaders({
+    'accept': 'application/json',
+    'X-API-KEY': '0a6b0118-8d90-4860-b30c-ed14d4841dd6',
+    'X-APP-ID': 'RMS',
+    'Content-Type': 'application/json'
+  });
 
+  options1 = { headers: this.headers1 };
+
+  getEmails(groupKey: string) {
     const urlEmail = `http://10.65.0.81:8443/apis/v1/groups/` + `${groupKey}` + `/members`;
     console.info(urlEmail);
-    return this.http.get(urlEmail,optionsEmail);
+    return this.http.get(urlEmail,this.options1);
   }
 }
 

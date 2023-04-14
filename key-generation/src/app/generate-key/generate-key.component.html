@@ -29,21 +29,53 @@
           blank</mat-error>
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
+      <!-- <mat-form-field appearance="outline">
         <mat-label>Owner Name</mat-label>
         <input matInput formControlName="ownerName">
         <mat-error *ngIf="ownerName && ownerName.invalid && ownerName.touched" style="color: red;">Owner name cannot be
           blank</mat-error>
+      </mat-form-field> -->
+      <mat-form-field appearance="fill">
+        <mat-label>Owner Name</mat-label>
+        <mat-select>
+          <mat-option>None</mat-option>
+          <mat-option *ngFor="let name of options" [value]="name">{{name}}</mat-option>
+        </mat-select>
       </mat-form-field>
+
+      <!-- <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Number</mat-label>
+        <input type="text"
+               placeholder="Pick one"
+               aria-label="Number"
+               matInput
+               formControlName="ownerName"
+               [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field> -->
+      
+      
     </p>
-    <mat-form-field appearance="outline">
+
+    <mat-form-field appearance="fill">
+      <mat-label>Owner Email</mat-label>
+      <mat-select>
+        <mat-option>None</mat-option>
+        <mat-option *ngFor="let email of emails" [value]="email">{{email}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <!-- <mat-form-field appearance="outline">
       <mat-label>Owner Email</mat-label>
       <input matInput formControlName="ownerEmails">
       <mat-error *ngIf="ownerEmails.errors?.required && ownerEmails.touched" style="color: red;">email address cannot be
         blank</mat-error>
       <mat-error *ngIf="ownerEmails.errors?.pattern && ownerEmails.touched" style="color: red;">Please enter valid email
         address</mat-error>
-    </mat-form-field>
+    </mat-form-field> -->
 
 
     <ng-select [items]="categories" bindLabel="name" placeholder="Select Services" appendTo="body" [multiple]="true"

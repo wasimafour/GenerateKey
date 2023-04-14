@@ -27,6 +27,8 @@ import { LoginService } from './service/login/login.service';
 import { Injectable } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { NgSelectModule } from '@ng-select/ng-select';
+import {MatSelectModule} from '@angular/material/select';
+
 
 
 @NgModule({
@@ -56,7 +58,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
     MatChipsModule,
     MatAutocompleteModule,
     MatIconModule,
-    NgSelectModule
+    NgSelectModule,
+    MatSelectModule
   ],
   providers: [
     AuthGuard

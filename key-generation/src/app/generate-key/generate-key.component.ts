@@ -15,6 +15,16 @@ interface testData {
 
 }
 
+interface result {
+  [x: string]: any;
+  id:string
+  name: string,
+  email: string,
+  phoneNumber:string
+}
+
+
+
 @Component({
   selector: 'app-generate-key',
   templateUrl: './generate-key.component.html',
@@ -35,6 +45,9 @@ export class GenerateKeyComponent {
     // {id: 6, name: 'Vue'}
   ];
 
+  options:string[] =[];
+  emails:string[]=[];
+  filteredOptions: Observable<string[]>;
  
  
   
@@ -44,21 +57,43 @@ export class GenerateKeyComponent {
     appName: new FormControl('',Validators.required),
     appId: new FormControl('',Validators.required),
     validTill: new FormControl('',Validators.required),
-    ownerName : new FormControl('',Validators.required),
+    ownerName: new FormControl(),
     ownerEmails: new FormControl('',[Validators.required,Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")])
   });
 
   generatedKey: any;
     
   constructor(private generate: GeneratekeyService,public modalService: NgbModal) {
-    
+   
   }
 
   
   ngOnInit() {
+    this.generate.getEmails('afour-pune-campus@afourtech.com').subscribe((response:any)=> {
+      response.data.map(item => {
+        this.emails.push(item.email);
+        this.options.push(item.name);
 
+      })
+      
+    })
+
+    this.filteredOptions = this.ownerName.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => this._filter(value))
+      )
+
+    console.info(this.filteredOptions);  
   }
 
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    
+    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+  }
+ 
   get appName(){
     return this.generateKeyForm.get('appName');
   }
@@ -85,9 +120,8 @@ export class GenerateKeyComponent {
       console.log(item);
     }));
     
-    this.generate.getEmails('test').subscribe(response => {
-      console.info(response);
-    })
+    
+    
     // this.generateKeyForm.controls.validTill = this.generateKeyForm.controls.validTill.value.toISOString()
     // this.generate.generateKey(this.generateKeyForm.value).subscribe(
     //   (respone:any) => {
