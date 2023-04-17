@@ -54,6 +54,20 @@ export class GeneratekeyService {
   options1 = { headers: this.headers1 };
 
   getEmails(groupKey: string) {
+
+    // let promise = new Promise<void>((resolve,reject)=> {
+    //   let urlEmail = `http://10.65.0.81:8443/apis/v1/groups/` + `${groupKey}` + `/members`;
+    //   this.http.get(urlEmail,this.options1)
+    //   .toPromise()
+    //   .then(
+    //     res => { // Success
+    //       console.log(res);
+    //       resolve();
+    //       //resolve(urlEmail);
+    //     }
+    //   )
+    // })
+    // return promise;
     const urlEmail = `http://10.65.0.81:8443/apis/v1/groups/` + `${groupKey}` + `/members`;
     console.info(urlEmail);
     return this.http.get(urlEmail,this.options1);

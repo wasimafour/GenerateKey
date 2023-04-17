@@ -1,6 +1,6 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { GeneratekeyService } from '../service/generatekey.service'
 import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -8,7 +8,7 @@ import { CustomModalComponent } from '../custom-modal/custom-modal.component';
 import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
 import {MatChipInputEvent} from '@angular/material/chips';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import {map, startWith} from 'rxjs/operators';
+import {map, startWith, tap} from 'rxjs/operators';
 import {MatChipsModule} from '@angular/material/chips';
 
 interface testData {
@@ -40,25 +40,26 @@ export class GenerateKeyComponent {
     {name:'Storage', disabled: true}
   ];
     
+  
   selected = [
     // {id: 5, name: 'Angular'},
     // {id: 6, name: 'Vue'}
   ];
 
-  options:string[] =[];
-  emails:string[]=[];
-  filteredOptions: Observable<string[]>;
- 
- 
-  
 
+  names:string[]=[];
+  emails:string[]=[];
+  filteredOptionsName: Observable<string[]>;
+  filteredOptionsEmail: Observable<string[]>;
+ 
   
   generateKeyForm: FormGroup = new FormGroup({
     appName: new FormControl('',Validators.required),
     appId: new FormControl('',Validators.required),
     validTill: new FormControl('',Validators.required),
     ownerName: new FormControl(),
-    ownerEmails: new FormControl('',[Validators.required,Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")])
+    ownerEmail: new FormControl(),
+    // ownerEmails: new FormControl('',[Validators.required,Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")])
   });
 
   generatedKey: any;
@@ -68,30 +69,54 @@ export class GenerateKeyComponent {
   }
 
   
-  ngOnInit() {
-    this.generate.getEmails('afour-pune-campus@afourtech.com').subscribe((response:any)=> {
-      response.data.map(item => {
+    async ngOnInit() {
+
+    var res:any =  await this.generate.getEmails('afour-pune-campus@afourtech.com').toPromise();
+
+    res.data.map(item => {
+        this.names.push(item.name);
         this.emails.push(item.email);
-        this.options.push(item.name);
+    });
 
-      })
+    // res.map(item => {
+    //   this.names.push(item.name);
+    //   this.names.push(item.email);
+    // })
+    
+
+    // this.generate.getEmails('afour-pune-campus@afourtech.com').subscribe((response:any)=> {
+    //   response.data.map(item => {
+    //     this.emails.push(item.email);
+    //     this.names.push(item.name);
+    //   })
       
-    })
+    // })
 
-    this.filteredOptions = this.ownerName.valueChanges
+
+    this.filteredOptionsName = this.ownerName.valueChanges
       .pipe(
         startWith(''),
-        map(value => this._filter(value))
-      )
+        map(value => this._filterName(value))
+      );
 
-    console.info(this.filteredOptions);  
+      this.filteredOptionsEmail = this.ownerEmail.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => this._filterEmail(value))
+      );  
+
+    
   }
 
 
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-    
-    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+  private _filterName(value: string): string[] {
+    const filterValueName = value.toLowerCase();
+    return this.names.filter(name => name.toLowerCase().includes(filterValueName));
+  }
+
+  private _filterEmail(value: string): string[] {
+    const filterValueEmail = value.toLowerCase();
+    return this.emails.filter(email => email.toLowerCase().includes(filterValueEmail));
   }
  
   get appName(){
@@ -110,8 +135,8 @@ export class GenerateKeyComponent {
     return this.generateKeyForm.get('ownerName');
   }
 
-  get ownerEmails(){
-    return this.generateKeyForm.get('ownerEmails');
+  get ownerEmail(){
+    return this.generateKeyForm.get('ownerEmail');
   }
 
    async generateKey() {
@@ -149,7 +174,7 @@ export class GenerateKeyComponent {
         "appId": this.generateKeyForm.controls.appId.value,
         "validTill": n,
         "ownerName": this.generateKeyForm.controls.ownerName.value,
-        "ownerEmails": this.generateKeyForm.controls.ownerEmails.value,
+        "ownerEmails": this.generateKeyForm.controls.ownerEmail.value,
         "selectedServices": this.selected
       }
     // })
