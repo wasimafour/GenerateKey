@@ -57,8 +57,8 @@ export class GenerateKeyComponent {
     appName: new FormControl('',Validators.required),
     appId: new FormControl('',Validators.required),
     validTill: new FormControl('',Validators.required),
-    ownerName: new FormControl(),
-    ownerEmail: new FormControl(),
+    ownerName: new FormControl('',Validators.required),
+    ownerEmail: new FormControl('',[Validators.required,Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]),
     // ownerEmails: new FormControl('',[Validators.required,Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")])
   });
 

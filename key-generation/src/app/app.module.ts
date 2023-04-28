@@ -28,6 +28,10 @@ import { Injectable } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { NgSelectModule } from '@ng-select/ng-select';
 import {MatSelectModule} from '@angular/material/select';
+import { PaginatorComponent } from './paginator/paginator.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { CreatePostComponent } from './create-post/create-post.component';
 
 
 
@@ -38,7 +42,9 @@ import {MatSelectModule} from '@angular/material/select';
     CustomModalComponent,
     LoginComponent,
     RegisterComponent,
-    NotAuthorizedComponent
+    NotAuthorizedComponent,
+    PaginatorComponent,
+    CreatePostComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +65,9 @@ import {MatSelectModule} from '@angular/material/select';
     MatAutocompleteModule,
     MatIconModule,
     NgSelectModule,
-    MatSelectModule
+    MatSelectModule,
+    MatPaginatorModule,
+    NgxPaginationModule
   ],
   providers: [
     AuthGuard

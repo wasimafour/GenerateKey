@@ -1,0 +1,23 @@
+<div class="parent">
+    <form class="form" [formGroup]="createPostForm">
+        <h2>Create Post</h2>
+        <mat-form-field appearance="fill">
+            <mat-label>Title</mat-label>
+            <input matInput formControlName="title">
+          </mat-form-field>
+
+          <p class="uploadFile">
+            <button  mat-raised-button color="primary">Upload</button>
+            &nbsp;
+            <button  mat-raised-button color="primary">Submit</button>
+          </p> 
+    </form>   
+    
+          
+  </div>
+  
+  
+  
+  
+  
+  <router-outlet></router-outlet>

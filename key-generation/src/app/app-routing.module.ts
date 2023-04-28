@@ -5,12 +5,16 @@ import {GenerateKeyComponent} from './generate-key/generate-key.component';
 import {RegisterComponent} from './register/register.component';
 import {NotAuthorizedComponent} from './not-authorized/not-authorized.component';
 import { AuthGuard } from './auth/auth.guard';
+import { PaginatorComponent } from './paginator/paginator.component';
+import { CreatePostComponent } from './create-post/create-post.component';
+
+
 
 const routes: Routes = [
-  {
-    component: LoginComponent, 
-    path: ""
-  },
+  // {
+  //   component: LoginComponent, 
+  //   path: ""
+  // },
   {
     component: GenerateKeyComponent, canActivate:[AuthGuard],
     path: "generate"
@@ -22,6 +26,14 @@ const routes: Routes = [
   {
     component: NotAuthorizedComponent,
     path: "not-authorized"
+  },
+  {
+    component: PaginatorComponent,
+    path: "pagination"
+  },
+  {
+    component: CreatePostComponent,
+    path: "createpost"
   },
 ];
 
