@@ -30,6 +30,15 @@
    padding-top: 15px;
  } 
 
+ .file-input {
+  display: none;
+}
+
+.createPost{
+  margin-top: 10px;
+  margin-left: 10px;
+}  
+
  /* .fill-remaining-space {
    
     flex: 1 1 auto;

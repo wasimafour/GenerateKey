@@ -22,16 +22,29 @@
         <h3>Selected Servies are</h3>
         <p>
             <span *ngFor="let item of formData.selectedServices">
-                {{item.name}}
+                {{item.name}}:
+                <div *ngIf="item.name=='Workspace'">
+                    <p>
+                        <span>API Key: {{formData.key}}</span>
+                        
+                    </p>
+                    <p>
+                        <span>API Id: {{formData.appId}}</span>
+                    </p>
+                </div>
+                <div *ngIf="item.name=='Storage'">
+                    <p>
+                        <span>API Key: 0fa8c89f-487e-4c64-be29-428c07427626</span>
+                    </p>
+                    <p>
+                        <span>API Id: SRGESTG</span>
+                    </p>
+                </div>
+               
             </span>
         </p>
         
-        <p>
-            <span>API Key: </span>
-        </p>
-        <p>
-            <span>API Id: </span>
-        </p>
+        
         
      
     </div>

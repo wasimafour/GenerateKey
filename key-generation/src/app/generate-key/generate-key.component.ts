@@ -37,7 +37,8 @@ export class GenerateKeyComponent {
   
   categories = [
     {name:'Workspace'},
-    {name:'Storage', disabled: true}
+    // {name:'Storage', disabled: true}
+    {name:'Storage'}
   ];
     
   

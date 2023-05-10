@@ -32,6 +32,7 @@ import { PaginatorComponent } from './paginator/paginator.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { CreatePostComponent } from './create-post/create-post.component';
+import { ShowpostComponent } from './showpost/showpost.component';
 
 
 
@@ -44,7 +45,8 @@ import { CreatePostComponent } from './create-post/create-post.component';
     RegisterComponent,
     NotAuthorizedComponent,
     PaginatorComponent,
-    CreatePostComponent
+    CreatePostComponent,
+    ShowpostComponent
   ],
   imports: [
     BrowserModule,

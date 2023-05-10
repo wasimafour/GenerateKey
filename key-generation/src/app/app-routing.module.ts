@@ -7,6 +7,7 @@ import {NotAuthorizedComponent} from './not-authorized/not-authorized.component'
 import { AuthGuard } from './auth/auth.guard';
 import { PaginatorComponent } from './paginator/paginator.component';
 import { CreatePostComponent } from './create-post/create-post.component';
+import { ShowpostComponent } from './showpost/showpost.component';
 
 
 
@@ -34,6 +35,10 @@ const routes: Routes = [
   {
     component: CreatePostComponent,
     path: "createpost"
+  },
+  {
+    component: ShowpostComponent,
+    path: ""
   },
 ];
 

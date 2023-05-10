@@ -4,7 +4,11 @@
 
  <app-generate-key></app-generate-key> -->
 <!-- <app-login></app-login> --> 
-<!-- <div class="container">
+<!-- <p class="createPost">
+  <button *ngIf="isButtonVisible" (click)="createPost()" mat-raised-button color="primary">Create Post</button>
+</p>
+
+<div class="container">
   <table class="table">
     <thead>
       <th>
@@ -34,7 +38,5 @@
     </pagination-controls> 
   </div>
 </div> -->
-<p class="createPost">
-  <button *ngIf="isButtonVisible" (click)="createPost()" mat-raised-button color="primary">Create Post</button>
-</p>
-<router-outlet></router-outlet>
+
+<router-outlet></router-outlet> 

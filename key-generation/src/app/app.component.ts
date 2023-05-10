@@ -30,33 +30,33 @@ export class AppComponent {
   constructor(private postService:PostsService,private router:Router){}
 
   ngOnInit():void {
-    this.postLists();
+    //this.postLists();
   }
 
-  postLists(): void{
-    this.postService.getAllPosts().subscribe((response) => {
-      console.info(response);
-      this.POSTS = response;
-    })
-  }
+  // postLists(): void{
+  //   this.postService.getAllPosts().subscribe((response) => {
+  //     console.info(response);
+  //     this.POSTS = response;
+  //   })
+  // }
 
-  onTableDataChange(event:any) {
-    console.info(event);
-    this.page=event;
-    this.postLists();
-  }
+  // onTableDataChange(event:any) {
+  //   console.info(event);
+  //   this.page=event;
+  //   this.postLists();
+  // }
 
-  onTableSizeChange(event:any) {
-    this.tableSize = event.target.value;
-    this.page=1;
-    this.postLists();
-  }
+  // onTableSizeChange(event:any) {
+  //   this.tableSize = event.target.value;
+  //   this.page=1;
+  //   this.postLists();
+  // }
 
-  createPost() {
-    console.info("in create post");
-    this.isButtonVisible=false;
-    this.router.navigate(['/createpost']);
-  }
+  // createPost() {
+  //   console.info("in create post");
+  //   this.isButtonVisible=false;
+  //   this.router.navigate(['/createpost']);
+  // }
 
 }
 
