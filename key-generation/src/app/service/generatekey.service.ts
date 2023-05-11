@@ -8,6 +8,7 @@ import { HttpHeaders } from '@angular/common/http'
 export class GeneratekeyService {
 
   url = "http://10.65.0.81:8443/apis/v1/admin/api-keys"
+
   //urlEmail = "http://10.65.0.81:8443/apis/v1/groups/RMS/members";
 
   headers = new HttpHeaders({
@@ -24,7 +25,13 @@ export class GeneratekeyService {
   options = { headers: this.headers };
   formData: any;
 
+  urlWorkspace = "http://localhost:8080/getKeys"
   constructor(private http: HttpClient) { }
+
+  
+  getKeys() :Promise<any> {
+    return this.http.get(this.urlWorkspace).toPromise(); 
+  }
 
   generateKey(data: any) {
 

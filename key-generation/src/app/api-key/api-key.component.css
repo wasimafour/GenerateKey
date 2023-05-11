@@ -1,29 +1,47 @@
 .fill-remaining-space {
-   
     flex: 1 1 auto;
     text-align: center;
   }
-.parent {
+.toolbar{
+    height: 40px;
+}
+.title {
+    padding: 0px;
+    margin: 0px;
+}
+/* .parent {
    display: flex;
    justify-content: center;
    align-items: center;
    flex-direction: column;
    margin-top: 5%;
- }
+ } */
 /* .mat-elevation-z8{
   width: 30%;
 } */
 
+.btnClass {
+    /* border: 2px solid black;
+    margin: 0 auto;
+    text-align: center;
+    padding: 3px; */
+    width:100%;
+    
+   
+}
 .btn {
+  margin-left: 50%;  
   float: right;
+  margin-right: 4%;
 }
 
 .mat-elevation-z8 {
-  width: 85%;
+  width: 45%;
   float: left;
   padding: 20px;
   /* border: 2px solid red; */
-  margin: 1%;
+  /* margin-top: 4%; */
+  margin: 2%;
 } 
 
 .test{
@@ -34,15 +52,38 @@
   width: 100%;
 }
 
-
+ .parent {
+   margin-left: 2%;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+   margin-top: 1%;
+ }
  table {
-  width: 100%;
+  /* width: 100%; */
+  /* white-space: normal;
+    word-wrap: break-word;
+    max-width: 200px; */
+
+    table-layout: fixed;
+    width: 100%;
+    /* white-space: -o-pre-wrap;  */
+    /* word-wrap: break-word; */
+    overflow: hidden;
+    max-width: 600px;
+    word-wrap: break-word;
+    /* white-space: pre-wrap;  */
+    /* white-space: -moz-pre-wrap;  */
+    /* white-space: -pre-wrap; */
+    /* white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; */
 }
 
 
 mat-form-field {
   width: 50%;
-  padding-top: 10px;
+  /* padding-top: 10px; */
  }
 
  .generateButton {
@@ -53,10 +94,10 @@ mat-form-field {
    padding-top: 15px;
  }   
 
-  mat-form-field {
-   width: 50%; 
+  /* mat-form-field {
+   width: 100%; 
    padding: 10px;
-  }
+  } */
 
 /*.example-full-width {
   width: 60%;

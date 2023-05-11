@@ -8,6 +8,7 @@ import { AuthGuard } from './auth/auth.guard';
 import { PaginatorComponent } from './paginator/paginator.component';
 import { CreatePostComponent } from './create-post/create-post.component';
 import { ShowpostComponent } from './showpost/showpost.component';
+import { ApiKeyComponent } from './api-key/api-key.component';
 
 
 
@@ -36,8 +37,12 @@ const routes: Routes = [
     component: CreatePostComponent,
     path: "createpost"
   },
+  // {
+  //   component: ShowpostComponent,
+  //   path: ""
+  // },
   {
-    component: ShowpostComponent,
+    component: ApiKeyComponent,
     path: ""
   },
 ];

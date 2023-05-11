@@ -33,7 +33,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { CreatePostComponent } from './create-post/create-post.component';
 import { ShowpostComponent } from './showpost/showpost.component';
-
+import {MatTableModule} from '@angular/material/table';
+import { ApiKeyComponent } from './api-key/api-key.component';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { ShowpostComponent } from './showpost/showpost.component';
     NotAuthorizedComponent,
     PaginatorComponent,
     CreatePostComponent,
-    ShowpostComponent
+    ShowpostComponent,
+    ApiKeyComponent
   ],
   imports: [
     BrowserModule,
@@ -69,7 +71,8 @@ import { ShowpostComponent } from './showpost/showpost.component';
     NgSelectModule,
     MatSelectModule,
     MatPaginatorModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    MatTableModule
   ],
   providers: [
     AuthGuard

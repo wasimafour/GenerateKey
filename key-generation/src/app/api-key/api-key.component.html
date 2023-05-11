@@ -1,0 +1,262 @@
+<mat-toolbar class="toolbar" color="primary">
+    <span class="fill-remaining-space">Generate key for application</span>
+  </mat-toolbar>
+  
+  <div class="parent">
+    <div class="btnClass">
+        <button class="btn" mat-raised-button color="primary" (click)="generateBtn()">Generate</button> 
+    </div>
+    
+     <div class="mat-elevation-z8">
+        <h3 class="title">Workspace Api Key List</h3>
+     
+     <mat-form-field class="search" appearance="standard">
+        <mat-label>Search</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Search app" #input>
+      </mat-form-field>
+      <table mat-table [dataSource]="dataSource">
+    
+         
+         <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> Id </th>
+          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+      
+        
+        <ng-container matColumnDef="app_name">
+          <th mat-header-cell *matHeaderCellDef> AppId </th>
+          <td mat-cell *matCellDef="let element"> {{element.app_name}} </td>
+        </ng-container>
+    
+        
+        <ng-container matColumnDef="app_id">
+          <th mat-header-cell *matHeaderCellDef> AppName </th>
+          <td mat-cell *matCellDef="let element"> {{element.app_id}} </td>
+        </ng-container>
+    
+        
+        <ng-container matColumnDef="api_key">
+          <th mat-header-cell *matHeaderCellDef> App Key </th>
+          <td mat-cell *matCellDef="let element"> {{element.api_key}} </td>
+        </ng-container>
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    
+      <mat-paginator [pageSizeOptions]="[3, 6, 9]"
+                     showFirstLastButtons
+                     aria-label="Select page of periodic elements">
+      </mat-paginator>
+
+      
+    </div>
+
+    <div class="mat-elevation-z8">
+        <h3 class="title">Storage Api Key List</h3>
+        
+        <mat-form-field class="search" appearance="standard">
+          <mat-label>Search</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Search app" #input>
+        </mat-form-field>
+        <table mat-table [dataSource]="dataSource">
+      
+           
+           <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> Id </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+          </ng-container>
+        
+          
+          <ng-container matColumnDef="app_name">
+            <th mat-header-cell *matHeaderCellDef> AppId </th>
+            <td mat-cell *matCellDef="let element"> {{element.app_name}} </td>
+          </ng-container>
+      
+          
+          <ng-container matColumnDef="app_id">
+            <th mat-header-cell *matHeaderCellDef> AppName </th>
+            <td mat-cell *matCellDef="let element"> {{element.app_id}} </td>
+          </ng-container>
+      
+          
+          <ng-container matColumnDef="api_key">
+            <th mat-header-cell *matHeaderCellDef> App Key </th>
+            <td mat-cell *matCellDef="let element"> {{element.api_key}} </td>
+          </ng-container>
+      
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      
+        <mat-paginator [pageSizeOptions]="[3, 6, 9]"
+                     showFirstLastButtons
+                     aria-label="Select page of periodic elements">
+      </mat-paginator>
+
+    </div> 
+  
+    <!-- <div class="mat-elevation-z8">
+      <form class="form" [formGroup]="generateKeyForm" (ngSubmit)="generateKey()">
+        <mat-form-field appearance="fill">
+          <mat-label>Application Name</mat-label>
+          <input matInput formControlName="appName">
+          <mat-error *ngIf="appName && appName.invalid && appName.touched" style="color: red;">Application name cannot be
+            blank</mat-error>
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill">
+          <mat-label>App Id</mat-label>
+          <input matInput formControlName="appId">
+          <mat-error *ngIf="appId && appId.invalid && appId.touched" style="color: red;">Application Id cannot be
+            blank</mat-error>
+        </mat-form-field>
+  
+        <p>
+          <mat-form-field appearance="fill">
+            <mat-label>Valid Till</mat-label>
+            <input matInput [matDatepicker]="picker" [min]="todayDate" formControlName="validTill">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="validTill && validTill.invalid && validTill.touched" style="color: red;">Valid date cannot be
+              blank</mat-error>
+          </mat-form-field>
+    
+          <mat-form-field appearance="fill">
+            <mat-label>Owner Name</mat-label>
+            <input type="text"
+                   aria-label="Owner Name"
+                   matInput
+                   formControlName="ownerName"
+                   [matAutocomplete]="auto1">
+            
+            <mat-autocomplete #auto1="matAutocomplete">
+              <mat-option *ngFor="let name of filteredOptionsName | async" [value]="name">
+                {{name}}
+              </mat-option>
+            </mat-autocomplete>
+            <mat-error *ngIf="ownerName && ownerName.invalid && ownerName.touched" style="color: red;">Owner name cannot be
+              blank</mat-error>
+          </mat-form-field>
+  
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Owner Email</mat-label>
+            <input type="text"
+                   aria-label="Owner Email"
+                   matInput
+                   formControlName="ownerEmail"
+                   [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let email of filteredOptionsEmail | async" [value]="email">
+                {{email}}
+              </mat-option>
+            </mat-autocomplete>
+            <mat-error *ngIf="ownerEmail.errors?.required && ownerEmail.touched" style="color: red;">email address cannot be
+              blank</mat-error>
+              <mat-error *ngIf="ownerEmail.errors?.pattern && ownerEmail.touched" style="color: red;">Please enter valid email
+                address</mat-error>
+          </mat-form-field>
+          
+          
+        </p>
+  
+        <ng-select [items]="categories" bindLabel="name" placeholder="Select Services" appendTo="body" [multiple]="true"
+          [(ngModel)]="selected" [ngModelOptions]="{standalone: true}" [hideSelected]="true">
+          
+        </ng-select>
+  
+        
+      <p class="generateButton">
+        <button [disabled]="generateKeyForm.invalid" mat-raised-button color="primary">Generate</button>
+      </p>  
+    
+        
+      </form>
+  
+    </div> -->
+    <!-- <form class="form" [formGroup]="generateKeyForm" (ngSubmit)="generateKey()">
+      <mat-form-field appearance="fill">
+        <mat-label>Application Name</mat-label>
+        <input matInput formControlName="appName">
+        <mat-error *ngIf="appName && appName.invalid && appName.touched" style="color: red;">Application name cannot be
+          blank</mat-error>
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill">
+        <mat-label>App Id</mat-label>
+        <input matInput formControlName="appId">
+        <mat-error *ngIf="appId && appId.invalid && appId.touched" style="color: red;">Application Id cannot be
+          blank</mat-error>
+      </mat-form-field>
+  
+      <p>
+        <mat-form-field appearance="fill">
+          <mat-label>Valid Till</mat-label>
+          <input matInput [matDatepicker]="picker" [min]="todayDate" formControlName="validTill">
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="validTill && validTill.invalid && validTill.touched" style="color: red;">Valid date cannot be
+            blank</mat-error>
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill">
+          <mat-label>Owner Name</mat-label>
+          <input type="text"
+                 aria-label="Owner Name"
+                 matInput
+                 formControlName="ownerName"
+                 [matAutocomplete]="auto1">
+          
+          <mat-autocomplete #auto1="matAutocomplete">
+            <mat-option *ngFor="let name of filteredOptionsName | async" [value]="name">
+              {{name}}
+            </mat-option>
+          </mat-autocomplete>
+          <mat-error *ngIf="ownerName && ownerName.invalid && ownerName.touched" style="color: red;">Owner name cannot be
+            blank</mat-error>
+        </mat-form-field>
+        
+        
+      </p>
+  
+  
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Owner Email</mat-label>
+        <input type="text"
+               aria-label="Owner Email"
+               matInput
+               formControlName="ownerEmail"
+               [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let email of filteredOptionsEmail | async" [value]="email">
+            {{email}}
+          </mat-option>
+        </mat-autocomplete>
+        <mat-error *ngIf="ownerEmail.errors?.required && ownerEmail.touched" style="color: red;">email address cannot be
+          blank</mat-error>
+          <mat-error *ngIf="ownerEmail.errors?.pattern && ownerEmail.touched" style="color: red;">Please enter valid email
+            address</mat-error>
+      </mat-form-field>
+  
+      <ng-select [items]="categories" bindLabel="name" placeholder="Select Services" appendTo="body" [multiple]="true"
+          [(ngModel)]="selected" [ngModelOptions]="{standalone: true}" [hideSelected]="true">
+          
+        </ng-select>
+  
+        
+      <p class="generateButton">
+        <button [disabled]="generateKeyForm.invalid" mat-raised-button color="primary">Generate</button>
+      </p>  
+  
+    </form>
+     -->
+          
+  </div>
+  
+  
+  
+  
+  
+  <router-outlet></router-outlet>

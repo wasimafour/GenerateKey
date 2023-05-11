@@ -1,31 +1,13 @@
-import {Component, ElementRef, ViewChild} from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-import { Observable, of } from 'rxjs';
-import { GeneratekeyService } from '../service/generatekey.service'
-import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { CustomModalComponent } from '../custom-modal/custom-modal.component';
-import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
-import {MatChipInputEvent} from '@angular/material/chips';
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import {map, startWith, tap} from 'rxjs/operators';
-import {MatChipsModule} from '@angular/material/chips';
-import { MatTableDataSource } from '@angular/material/table';
+import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
-import { Route, Router } from '@angular/router';
-
-interface testData {
-
-}
-
-interface result {
-  [x: string]: any;
-  id:string
-  name: string,
-  email: string,
-  phoneNumber:string
-}
-
+import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Observable } from 'rxjs';
+import { startWith, map } from 'rxjs/operators';
+import { CustomModalComponent } from '../custom-modal/custom-modal.component';
+import { GeneratekeyService } from '../service/generatekey.service';
+import { MatTableDataSource } from '@angular/material/table';
 
 interface PeriodicElement {
   id: number
@@ -35,13 +17,12 @@ interface PeriodicElement {
 }
 
 @Component({
-  selector: 'app-generate-key',
-  templateUrl: './generate-key.component.html',
-  styleUrls: ['./generate-key.component.css']
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'app-api-key',
+  templateUrl: './api-key.component.html',
+  styleUrls: ['./api-key.component.css']
 })
-
-
-export class GenerateKeyComponent {
+export class ApiKeyComponent implements OnInit {
 
   todayDate:Date = new Date(Date.now() + ( 3600 * 1000 * 24));
   
@@ -50,19 +31,29 @@ export class GenerateKeyComponent {
   ];
  
   displayedColumns: string[] = ['id','app_id', 'app_name', 'api_key'];
-  // dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
+  //  dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
+  dataSource: MatTableDataSource<PeriodicElement>;
   
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngAfterViewInit() {
     //this.dataSource.paginator = this.paginator;
+    setTimeout(() => {
+      this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+      this.dataSource.paginator = this.paginator;
+    },100)
+
+    
+      
+    
+    console.info("ngAfterViewInit");
   }
   
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    //this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.dataSource.filter = filterValue.trim().toLowerCase();
 }
   
 
@@ -113,18 +104,26 @@ export class GenerateKeyComponent {
   
   generateBtn() {
     
-    this.route.navigate(['/generateKey'])
+    this.route.navigate(['/generate'])
   }
 
   
     async ngOnInit() {
 
-    //   var result:any = await this.generate.getKeys().toPromise();
+      // var result:any = await this.generate.getKeys().then(data => {
+      //   this.ELEMENT_DATA.push(data);
+      // })
     //   result.map(item => {
     //   this.ELEMENT_DATA.push(item);
     // })
     // console.info(result);
     // console.info(this.ELEMENT_DATA);
+    // this.generate.getKeys().then(data => {
+    //   this.ELEMENT_DATA = data;
+    //   console.info(this.ELEMENT_DATA);
+    // })
+    this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+      this.dataSource.paginator = this.paginator;
       
 
     var res:any =  await this.generate.getEmails('afour-pune-campus@afourtech.com').toPromise();
@@ -243,5 +242,6 @@ export class GenerateKeyComponent {
   }
 
 
-  
+
+
 }
