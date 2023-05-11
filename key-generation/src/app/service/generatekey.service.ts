@@ -25,12 +25,17 @@ export class GeneratekeyService {
   options = { headers: this.headers };
   formData: any;
 
-  urlWorkspace = "http://localhost:8080/getKeys"
+  urlWorkspace = "http://localhost:8080/getKeysWorkspace"
+  urlStorage = "http://localhost:8080/getKeysStorage"
   constructor(private http: HttpClient) { }
 
   
-  getKeys() :Promise<any> {
+  getKeysWorkspace() :Promise<any> {
     return this.http.get(this.urlWorkspace).toPromise(); 
+  }
+
+  getKeysStorage() :Promise<any> {
+    return this.http.get(this.urlStorage).toPromise(); 
   }
 
   generateKey(data: any) {

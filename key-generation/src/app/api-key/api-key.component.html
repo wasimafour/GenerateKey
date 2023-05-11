@@ -12,9 +12,9 @@
      
      <mat-form-field class="search" appearance="standard">
         <mat-label>Search</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="Search app" #input>
+        <input matInput (keyup)="applyFilterWorkspace($event)" placeholder="Search app" #input>
       </mat-form-field>
-      <table mat-table [dataSource]="dataSource">
+      <table mat-table [dataSource]="dataSource1">
     
          
          <ng-container matColumnDef="id">
@@ -44,7 +44,7 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
     
-      <mat-paginator [pageSizeOptions]="[3, 6, 9]"
+      <mat-paginator #paginator1="matPaginator" [pageSizeOptions]="[2, 4, 6]"
                      showFirstLastButtons
                      aria-label="Select page of periodic elements">
       </mat-paginator>
@@ -57,9 +57,9 @@
         
         <mat-form-field class="search" appearance="standard">
           <mat-label>Search</mat-label>
-          <input matInput (keyup)="applyFilter($event)" placeholder="Search app" #input>
+          <input matInput (keyup)="applyFilterStorage($event)" placeholder="Search app" #input>
         </mat-form-field>
-        <table mat-table [dataSource]="dataSource">
+        <table mat-table [dataSource]="dataSource2">
       
            
            <ng-container matColumnDef="id">
@@ -89,9 +89,9 @@
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
       
-        <mat-paginator [pageSizeOptions]="[3, 6, 9]"
+        <mat-paginator #paginator2="matPaginator" [pageSizeOptions]="[2, 4, 6]"
                      showFirstLastButtons
-                     aria-label="Select page of periodic elements">
+                     aria-label="Select page">
       </mat-paginator>
 
     </div> 

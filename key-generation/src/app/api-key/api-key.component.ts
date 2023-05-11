@@ -26,22 +26,32 @@ export class ApiKeyComponent implements OnInit {
 
   todayDate:Date = new Date(Date.now() + ( 3600 * 1000 * 24));
   
-  ELEMENT_DATA: PeriodicElement[]=[
+  ELEMENT_DATA1: PeriodicElement[]=[
+    // {id: 1, appId: 'Hydrogen', appName:".0079", validTill: 'H'},
+  ];
+
+  ELEMENT_DATA2: PeriodicElement[]=[
     // {id: 1, appId: 'Hydrogen', appName:".0079", validTill: 'H'},
   ];
  
   displayedColumns: string[] = ['id','app_id', 'app_name', 'api_key'];
   //  dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
-  dataSource: MatTableDataSource<PeriodicElement>;
-  
+  dataSource1: MatTableDataSource<PeriodicElement>;
+  dataSource2: MatTableDataSource<PeriodicElement>;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild('paginator1') paginator1: MatPaginator;
+  @ViewChild('paginator2') paginator2: MatPaginator;
 
   ngAfterViewInit() {
     //this.dataSource.paginator = this.paginator;
     setTimeout(() => {
-      this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
-      this.dataSource.paginator = this.paginator;
+      this.dataSource1 = new MatTableDataSource(this.ELEMENT_DATA1);
+      this.dataSource1.paginator = this.paginator1;
+    },100)
+
+    setTimeout(() => {
+      this.dataSource2 = new MatTableDataSource(this.ELEMENT_DATA2);
+      this.dataSource2.paginator = this.paginator2;
     },100)
 
     
@@ -51,9 +61,14 @@ export class ApiKeyComponent implements OnInit {
   }
   
 
-  applyFilter(event: Event) {
+  applyFilterWorkspace(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.dataSource1.filter = filterValue.trim().toLowerCase();
+}
+
+applyFilterStorage(event: Event) {
+  const filterValue = (event.target as HTMLInputElement).value;
+  this.dataSource2.filter = filterValue.trim().toLowerCase();
 }
   
 
@@ -90,9 +105,14 @@ export class ApiKeyComponent implements OnInit {
     
   constructor(private generate: GeneratekeyService,public modalService: NgbModal,private route:Router) {
 
-    this.generate.getKeys().then(data => {
-      this.ELEMENT_DATA = data;
-      console.info(this.ELEMENT_DATA);
+    this.generate.getKeysWorkspace().then(data => {
+      this.ELEMENT_DATA1 = data;
+      console.info(this.ELEMENT_DATA1);
+    })
+
+    this.generate.getKeysStorage().then(data => {
+      this.ELEMENT_DATA2 = data;
+      console.info(this.ELEMENT_DATA2);
     })
     // var res:any = this.generate.getKeys().toPromise();
     // res.data.map(item => {
@@ -120,10 +140,13 @@ export class ApiKeyComponent implements OnInit {
     // console.info(this.ELEMENT_DATA);
     // this.generate.getKeys().then(data => {
     //   this.ELEMENT_DATA = data;
-    //   console.info(this.ELEMENT_DATA);
+    //   console.info(this.ELEMENT_DATA); 
     // })
-    this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
-      this.dataSource.paginator = this.paginator;
+    // this.dataSource1 = new MatTableDataSource(this.ELEMENT_DATA1);
+    //   this.dataSource1.paginator = this.paginator;
+
+    //   this.dataSource2 = new MatTableDataSource(this.ELEMENT_DATA2);
+    //   this.dataSource2.paginator = this.paginator;
       
 
     var res:any =  await this.generate.getEmails('afour-pune-campus@afourtech.com').toPromise();

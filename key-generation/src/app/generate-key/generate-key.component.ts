@@ -99,7 +99,7 @@ export class GenerateKeyComponent {
     
   constructor(private generate: GeneratekeyService,public modalService: NgbModal,private route:Router) {
 
-    this.generate.getKeys().then(data => {
+    this.generate.getKeysWorkspace().then(data => {
       this.ELEMENT_DATA = data;
       console.info(this.ELEMENT_DATA);
     })
