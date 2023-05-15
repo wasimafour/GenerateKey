@@ -7,14 +7,15 @@ import { HttpHeaders } from '@angular/common/http'
 })
 export class GeneratekeyService {
 
-  url = "http://10.65.0.81:8443/apis/v1/admin/api-keys"
+  //url = "http://10.65.0.81:8443/apis/v1/admin/api-keys"
+  url = "http://localhost:8080/generate";
 
   //urlEmail = "http://10.65.0.81:8443/apis/v1/groups/RMS/members";
 
   headers = new HttpHeaders({
     'accept': 'application/json',
-    'X-API-KEY': '20c84287-cb7b-4892-9dc6-2c66b676d0fc',
-    'X-APP-ID': 'ADMIN',
+    //'X-API-KEY': '20c84287-cb7b-4892-9dc6-2c66b676d0fc',
+    //'X-APP-ID': 'ADMIN',
     'Content-Type': 'application/json'
   });
   // headers = new HttpHeaders({
@@ -25,8 +26,8 @@ export class GeneratekeyService {
   options = { headers: this.headers };
   formData: any;
 
-  urlWorkspace = "http://localhost:8080/getKeysWorkspace"
-  urlStorage = "http://localhost:8080/getKeysStorage"
+  urlWorkspace = "http://localhost:8080/getWorkspaceKeys"
+  urlStorage = "http://localhost:8080/getStorageKeys"
   constructor(private http: HttpClient) { }
 
   
@@ -38,20 +39,28 @@ export class GeneratekeyService {
     return this.http.get(this.urlStorage).toPromise(); 
   }
 
-  generateKey(data: any) {
-
+  service:string[];
+  generateKey(data: any,selected:any) {
+    this.service = selected
     //return this.http.post("http://localhost:8080/api/v1/generate",data,this.options);
     const date = new Date(data.validTill);
+    console.info(selected);
 
 
     this.formData = {
       "appName": data.appName,
       "appId": data.appId,
       "validTill": date.toISOString(),
+      ownerName:data.ownerName,
       "ownerEmails": [
         data.ownerEmails
+      ],
+      selectedService:[
+        this.service
       ]
     }
+
+    console.info(this.formData);
 
     return this.http.post(this.url, this.formData, this.options);
   }

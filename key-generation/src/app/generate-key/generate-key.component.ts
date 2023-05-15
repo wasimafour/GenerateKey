@@ -73,10 +73,12 @@ export class GenerateKeyComponent {
   ];
     
   
-  selected = [
-    // {id: 5, name: 'Angular'},
-    // {id: 6, name: 'Vue'}
-  ];
+  // selected = [
+  //   // {id: 5, name: 'Angular'},
+  //   // {id: 6, name: 'Vue'}
+  // ];
+
+  selected :string[]=[];
 
 
   names:string[]=[];
@@ -90,7 +92,8 @@ export class GenerateKeyComponent {
     appId: new FormControl('',Validators.required),
     validTill: new FormControl('',Validators.required),
     ownerName: new FormControl('',Validators.required),
-    ownerEmail: new FormControl('',[Validators.required,Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]),
+    ownerEmails: new FormControl('',[Validators.required,Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]),
+    
     // ownerEmails: new FormControl('',[Validators.required,Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")])
   });
 
@@ -141,7 +144,7 @@ export class GenerateKeyComponent {
         map(value => this._filterName(value))
       );
 
-      this.filteredOptionsEmail = this.ownerEmail.valueChanges
+      this.filteredOptionsEmail = this.ownerEmails.valueChanges
       .pipe(
         startWith(''),
         map(value => this._filterEmail(value))
@@ -177,8 +180,8 @@ export class GenerateKeyComponent {
     return this.generateKeyForm.get('ownerName');
   }
 
-  get ownerEmail(){
-    return this.generateKeyForm.get('ownerEmail');
+  get ownerEmails(){
+    return this.generateKeyForm.get('ownerEmails');
   }
 
   //   getKeys(){
@@ -194,7 +197,8 @@ export class GenerateKeyComponent {
       console.log(item);
     }));
     
-    
+    var response = await this.generate.generateKey(this.generateKeyForm.value,this.selected).toPromise();
+    // console.info(response);
     
     // this.generateKeyForm.controls.validTill = this.generateKeyForm.controls.validTill.value.toISOString()
     // this.generate.generateKey(this.generateKeyForm.value).subscribe(
@@ -214,31 +218,35 @@ export class GenerateKeyComponent {
     //     }
     // .subscribe((response:any) => {
     //   console.info(response.data.generatedKey);
-    const d = new Date(this.generateKeyForm.controls.validTill.value);
-    const n = new Date(d.getFullYear(), d.getMonth(), d.getDate(), d.getHours(), d.getMinutes() - d.getTimezoneOffset()).toISOString();
-    console.info(n);
-      this.generatedKey = {
-        "key": "key",
-        "appName": this.generateKeyForm.controls.appName.value,
-        "appId": this.generateKeyForm.controls.appId.value,
-        "validTill": n,
-        "ownerName": this.generateKeyForm.controls.ownerName.value,
-        "ownerEmails": this.generateKeyForm.controls.ownerEmail.value,
-        "selectedServices": this.selected
-      }
+
+
+    // const d = new Date(this.generateKeyForm.controls.validTill.value);
+    // const n = new Date(d.getFullYear(), d.getMonth(), d.getDate(), d.getHours(), d.getMinutes() - d.getTimezoneOffset()).toISOString();
+    // console.info(n);
+    //   this.generatedKey = {
+    //     "key": "key",
+    //     "appName": this.generateKeyForm.controls.appName.value,
+    //     "appId": this.generateKeyForm.controls.appId.value,
+    //     "validTill": n,
+    //     "ownerName": this.generateKeyForm.controls.ownerName.value,
+    //     "ownerEmails": this.generateKeyForm.controls.ownerEmail.value,
+    //     "selectedServices": this.selected
+    //   }
+
+
     // })
 
-    const modalRef = this.modalService.open(CustomModalComponent,
-      {
-        scrollable: true,
-        windowClass: 'myCustomModalClass',
+    // const modalRef = this.modalService.open(CustomModalComponent,
+    //   {
+    //     scrollable: true,
+    //     windowClass: 'myCustomModalClass',
 
-      });
-      modalRef.componentInstance.formData = this.generatedKey
-    modalRef.result.then((result:any) => {
-      console.log(result);
-    }, (reason:any) => {
-    });
+    //   });
+    //   modalRef.componentInstance.formData = this.generatedKey
+    // modalRef.result.then((result:any) => {
+    //   console.log(result);
+    // }, (reason:any) => {
+    // });
 
   }
 

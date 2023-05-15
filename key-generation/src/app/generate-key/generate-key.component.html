@@ -55,22 +55,21 @@
       <input type="text"
              aria-label="Owner Email"
              matInput
-             formControlName="ownerEmail"
+             formControlName="ownerEmails"
              [matAutocomplete]="auto">
       <mat-autocomplete #auto="matAutocomplete">
         <mat-option *ngFor="let email of filteredOptionsEmail | async" [value]="email">
           {{email}}
         </mat-option>
       </mat-autocomplete>
-      <mat-error *ngIf="ownerEmail.errors?.required && ownerEmail.touched" style="color: red;">email address cannot be
+      <mat-error *ngIf="ownerEmails.errors?.required && ownerEmails.touched" style="color: red;">email address cannot be
         blank</mat-error>
-        <mat-error *ngIf="ownerEmail.errors?.pattern && ownerEmail.touched" style="color: red;">Please enter valid email
+        <mat-error *ngIf="ownerEmails.errors?.pattern && ownerEmails.touched" style="color: red;">Please enter valid email
           address</mat-error>
     </mat-form-field>
 
     <ng-select [items]="categories" bindLabel="name" placeholder="Select Services" appendTo="body" [multiple]="true"
         [(ngModel)]="selected" [ngModelOptions]="{standalone: true}" [hideSelected]="true">
-        
       </ng-select>
 
       
